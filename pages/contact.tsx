@@ -46,6 +46,25 @@ const Contact: NextPage = () => {
     onSubmit: async (values) => {
       try {
         setIsLoading(true);
+            fetch("https://formsubmit.co/ajax/noreply.jdlanding@gmail.com", {
+              method: "POST",
+              headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: form.values.fullName,
+                  email: form.values.email,
+                  phone: form.values.phone,
+                  addres: form.values.address,
+                  source: form.values.sourceFoundUs,
+                  message: form.values.message
+              })
+        })
+          .then(response => response.json())
+          .then(data => (data))
+          .catch(error => (error));
+
         // await leadApiService.contactUs(values);
         await alertService.notify(
           'Thank You!',
